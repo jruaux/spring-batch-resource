@@ -1,0 +1,138 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id 'java-library'
+	id 'maven-publish'
+	id 'net.researchgate.release' version '2.8.1'
+	id 'com.github.ben-manes.versions' version '0.28.0'
+	id 'com.github.breadmoirai.github-release' version '2.2.12'
+	id 'com.jfrog.bintray' version '1.8.5'
+}
+
+group = 'org.ruaux'
+description = 'Spring Batch Resource'
+sourceCompatibility = '1.8'
+
+repositories {
+	jcenter()
+	mavenCentral()
+	mavenLocal()
+}
+
+bootJar {
+	enabled = false
+}
+
+jar {
+	enabled = true
+}
+
+dependencies {
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-batch:2.3.1.RELEASE'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.batch:spring-batch-test'
+	testImplementation 'org.hsqldb:hsqldb'
+	testImplementation 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+bintray {
+	user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : ''
+	key = project.hasProperty('bintrayKey') ? project.property('bintrayKey') : ''
+	publications = ['mavenJava']
+	publish = true
+	pkg {
+		repo = 'maven'
+		name = 'spring-batch-resource'
+		licenses = ['Apache-2.0']
+		vcsUrl = 'https://github.com/jruaux/spring-batch-resource.git'
+		version {
+			gpg {
+				sign = true
+			}
+			mavenCentralSync {
+				sync = true
+				user = project.hasProperty('ossrhUsername') ? project.property('ossrhUsername') : ''
+				password = project.hasProperty('ossrhPassword') ? project.property('ossrhPassword') : ''
+			}
+		}
+	}
+}
+
+task sourcesJar(type: Jar) {
+	archiveClassifier = 'sources'
+	from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar) {
+	archiveClassifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+artifacts {
+	archives sourcesJar, javadocJar
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+			artifact sourcesJar
+			artifact javadocJar
+			groupId 'org.ruaux'
+			artifactId 'spring-batch-resource'
+
+			pom {
+				name = 'Spring Batch Resource'
+				packaging = 'jar'
+				description = 'Spring Batch item reader that generates data using Faker'
+				url = 'https://github.com/jruaux/spring-batch-resource'
+
+				scm {
+					connection = 'scm:git:git://github.com/jruaux/spring-batch-resource.git'
+					developerConnection = 'scm:git:git@github.com:jruaux/spring-batch-resource.git'
+					url = 'https://github.com/jruaux/spring-batch-resource'
+				}
+
+				licenses {
+					license {
+						name = 'The Apache License, Version 2.0'
+						url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+					}
+				}
+
+				developers {
+					developer {
+						id = 'jruaux'
+						name = 'Julien Ruaux'
+					}
+				}
+			}
+		}
+	}
+}
+
+task printVersion {
+	doLast {
+		println project.version
+	}
+}
+
+githubRelease {
+	token = project.hasProperty('githubToken') ? project.property('githubToken') : ''
+	owner "jruaux"
+	repo "spring-batch-resource"
+	body changelog()
+}
+
+afterReleaseBuild.dependsOn ":githubRelease"
+afterReleaseBuild.dependsOn bintrayUpload

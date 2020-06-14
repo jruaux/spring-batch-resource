@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-package com.redislabs.riot.file;
-
-import java.util.Iterator;
-import java.util.List;
+package org.springframework.batch.item.resource;
 
 import org.springframework.batch.item.json.GsonJsonObjectMarshaller;
 import org.springframework.batch.item.json.JacksonJsonObjectMarshaller;
@@ -26,6 +23,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Item writer that writes data in json format to an output file. The location

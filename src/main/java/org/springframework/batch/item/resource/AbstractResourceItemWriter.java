@@ -14,23 +14,11 @@
  * limitations under the License.
  */
 
-package com.redislabs.riot.file;
-
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.nio.channels.Channels;
-import java.nio.channels.WritableByteChannel;
-import java.nio.charset.UnsupportedCharsetException;
-import java.util.List;
+package org.springframework.batch.item.resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.batch.item.ExecutionContext;
-import org.springframework.batch.item.ItemStream;
-import org.springframework.batch.item.ItemStreamException;
-import org.springframework.batch.item.WriteFailedException;
-import org.springframework.batch.item.WriterNotOpenException;
+import org.springframework.batch.item.*;
 import org.springframework.batch.item.file.FlatFileFooterCallback;
 import org.springframework.batch.item.file.FlatFileHeaderCallback;
 import org.springframework.batch.item.file.ResourceAwareItemWriterItemStream;
@@ -39,6 +27,14 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
 import org.springframework.util.Assert;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.channels.Channels;
+import java.nio.channels.WritableByteChannel;
+import java.nio.charset.UnsupportedCharsetException;
+import java.util.List;
 
 /**
  * Base class for item writers that write data to a file or stream.
@@ -59,8 +55,7 @@ import org.springframework.util.Assert;
  *
  * @since 4.1
  */
-public abstract class AbstractResourceItemWriter<T> extends AbstractItemStreamItemWriter<T>
-		implements ResourceAwareItemWriterItemStream<T>, InitializingBean {
+public abstract class AbstractResourceItemWriter<T> extends AbstractItemStreamItemWriter<T> implements ResourceAwareItemWriterItemStream<T>, InitializingBean {
 
 	public static final boolean DEFAULT_TRANSACTIONAL = true;
 

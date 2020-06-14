@@ -1,4 +1,4 @@
-package com.redislabs.riot.file;
+package org.springframework.batch.item.resource;
 
 import org.springframework.core.io.AbstractResource;
 import org.springframework.core.io.WritableResource;

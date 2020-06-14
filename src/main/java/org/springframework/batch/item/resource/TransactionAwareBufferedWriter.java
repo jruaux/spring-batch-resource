@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redislabs.riot.file;
+package org.springframework.batch.item.resource;
+
+import org.springframework.batch.item.WriteFailedException;
+import org.springframework.batch.support.transaction.FlushFailedException;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.ByteBuffer;
 import java.nio.channels.WritableByteChannel;
-
-import org.springframework.batch.item.WriteFailedException;
-import org.springframework.batch.support.transaction.FlushFailedException;
-import org.springframework.transaction.support.TransactionSynchronizationAdapter;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 /**
  * Wrapper for a {@link WritableByteChannel} that delays actually writing to or closing the

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.redislabs.riot.file;
+package org.springframework.batch.item.resource;
 
 import org.springframework.batch.item.file.FlatFileFooterCallback;
 import org.springframework.batch.item.file.FlatFileHeaderCallback;

@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.redislabs.riot.file;
+package org.springframework.batch.item.resource;
 
 import java.io.FilterOutputStream;
 import java.io.IOException;

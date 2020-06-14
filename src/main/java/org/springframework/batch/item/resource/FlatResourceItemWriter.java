@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.redislabs.riot.file;
-
-import java.util.List;
+package org.springframework.batch.item.resource;
 
 import org.springframework.batch.item.file.transform.LineAggregator;
 import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
+
+import java.util.List;
 
 /**
  * This class is an item writer that writes data to a file or stream. The writer
