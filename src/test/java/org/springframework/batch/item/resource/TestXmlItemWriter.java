@@ -12,7 +12,8 @@ import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.json.JacksonJsonObjectMarshaller;
 import org.springframework.batch.item.redis.support.DataType;
 import org.springframework.batch.item.redis.support.KeyValue;
-import org.springframework.batch.item.resource.support.XmlResourceItemWriterBuilder;
+import org.springframework.batch.item.xml.XmlResourceItemWriter;
+import org.springframework.batch.item.xml.support.XmlResourceItemWriterBuilder;
 import org.springframework.core.io.FileSystemResource;
 
 import com.fasterxml.jackson.databind.ObjectReader;

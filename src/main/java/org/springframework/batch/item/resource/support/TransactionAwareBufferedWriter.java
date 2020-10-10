@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.batch.item.resource;
+package org.springframework.batch.item.resource.support;
 
 import org.springframework.batch.item.WriteFailedException;
 import org.springframework.batch.support.transaction.FlushFailedException;

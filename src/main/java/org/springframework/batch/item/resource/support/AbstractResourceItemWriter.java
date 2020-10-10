@@ -22,7 +22,6 @@ import org.springframework.batch.item.*;
 import org.springframework.batch.item.file.FlatFileFooterCallback;
 import org.springframework.batch.item.file.FlatFileHeaderCallback;
 import org.springframework.batch.item.file.ResourceAwareItemWriterItemStream;
-import org.springframework.batch.item.resource.TransactionAwareBufferedWriter;
 import org.springframework.batch.item.support.AbstractItemStreamItemWriter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;

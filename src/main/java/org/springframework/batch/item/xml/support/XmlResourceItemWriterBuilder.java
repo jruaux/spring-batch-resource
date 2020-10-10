@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package org.springframework.batch.item.resource.support;
+package org.springframework.batch.item.xml.support;
 
 import org.springframework.batch.item.file.FlatFileFooterCallback;
 import org.springframework.batch.item.file.FlatFileHeaderCallback;
 import org.springframework.batch.item.json.JsonObjectMarshaller;
-import org.springframework.batch.item.resource.XmlResourceItemWriter;
+import org.springframework.batch.item.xml.XmlResourceItemWriter;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
 import org.springframework.util.Assert;

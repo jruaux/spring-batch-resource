@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.batch.item.resource;
+package org.springframework.batch.item.xml;
 
 import java.util.Iterator;
 import java.util.List;
