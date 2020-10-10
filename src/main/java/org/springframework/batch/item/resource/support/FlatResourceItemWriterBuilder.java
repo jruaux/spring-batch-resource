@@ -1,8 +1,9 @@
-package org.springframework.batch.item.resource;
+package org.springframework.batch.item.resource.support;
 
 import org.springframework.batch.item.file.FlatFileFooterCallback;
 import org.springframework.batch.item.file.FlatFileHeaderCallback;
 import org.springframework.batch.item.file.transform.*;
+import org.springframework.batch.item.resource.FlatResourceItemWriter;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
 import org.springframework.util.Assert;

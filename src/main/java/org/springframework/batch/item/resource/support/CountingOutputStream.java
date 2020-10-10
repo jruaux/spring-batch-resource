@@ -12,7 +12,7 @@
  * the License.
  */
 
-package org.springframework.batch.item.resource;
+package org.springframework.batch.item.resource.support;
 
 import java.io.FilterOutputStream;
 import java.io.IOException;

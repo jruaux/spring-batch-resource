@@ -1,0 +1,11 @@
+<root>
+	<record>
+		<key>key1</key>
+		<ttl>123</ttl>
+		<value>
+			<field2>value2</field2>
+			<field1>value1</field1>
+		</value>
+		<type>HASH</type>
+	</record>
+</root>

@@ -17,6 +17,7 @@
 package org.springframework.batch.item.resource;
 
 import org.springframework.batch.item.file.transform.LineAggregator;
+import org.springframework.batch.item.resource.support.AbstractResourceItemWriter;
 import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;

@@ -19,6 +19,7 @@ package org.springframework.batch.item.resource;
 import org.springframework.batch.item.json.GsonJsonObjectMarshaller;
 import org.springframework.batch.item.json.JacksonJsonObjectMarshaller;
 import org.springframework.batch.item.json.JsonObjectMarshaller;
+import org.springframework.batch.item.resource.support.AbstractResourceItemWriter;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
 import org.springframework.util.Assert;
