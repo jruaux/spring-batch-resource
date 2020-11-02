@@ -22,7 +22,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.16'
 	annotationProcessor 'org.projectlombok:lombok:1.18.16'
 	implementation 'org.springframework.boot:spring-boot-starter-batch:2.3.5.RELEASE'
-	api 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.3'
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.3'
 	testImplementation('org.springframework.boot:spring-boot-starter-test:2.3.5.RELEASE') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
