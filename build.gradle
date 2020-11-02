@@ -125,7 +125,7 @@ githubRelease {
 	owner "jruaux"
 	repo "spring-batch-resource"
     releaseAssets distZip, distTar
-    draft true    
+    draft true
 	body changelog()
 }
 
