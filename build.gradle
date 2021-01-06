@@ -13,6 +13,8 @@ plugins {
 
 group = 'org.ruaux'
 description = 'Spring Batch Resource'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 bootJar {
     enabled = false
