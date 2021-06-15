@@ -1,22 +1,15 @@
 = Spring Batch Resource
-// Settings
-:idprefix:
-:idseparator: -
-ifdef::env-github,env-browser[:outfilesuffix: .adoc]
-ifndef::env-github[:icons: font]
-// URIs
-:project-repo: jruaux/spring-batch-resource
-:repo-url: https://github.com/{project-repo}
-// GitHub customization
-ifdef::env-github[]
-:badges:
-:tag: master
-:!toc-title:
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-endif::[]
+:linkattrs:
+:project-owner:   jruaux
+:project-name:    spring-batch-resource
+:project-group:   com.redislabs
+:project-version: 1.3.4
 
-Spring Batch item writers for file resources instead of actual files.
+image:https://github.com/{project-owner}/{project-name}/actions/workflows/gradle.yml/badge.svg["Build Status", link="https://github.com/{project-owner}/{project-name}/actions"]
+image:https://codecov.io/gh/{project-owner}/{project-name}/branch/master/graph/badge.svg["Coverage", link="https://codecov.io/gh/{project-owner}/{project-name}"]
+image:https://img.shields.io/maven-central/v/{project-group}/{project-name}.svg[Download, link="https://search.maven.org/#search|ga|1|{project-name}"]
+image:https://img.shields.io/github/downloads/{project-owner}/{project-name}/total[GitHub all releases]
+
+---
+
+ItemWriter implementations that can write to org.springframework.core.io.Resource instead of files.
