@@ -1,14 +1,15 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'distribution'
-	id 'java-library'
+    id 'java'
+    id 'java-library'
     id 'java-library-distribution'
-	id 'maven-publish'
-	id 'com.jfrog.bintray' version '1.8.5'
-	id 'net.researchgate.release' version '2.8.1'
-	id 'com.github.ben-manes.versions' version '0.38.0'
-	id 'com.github.breadmoirai.github-release' version '2.2.12'
+    id 'maven-publish'
+    id 'signing'
+    id 'jacoco'
+    id 'org.springframework.boot' version '2.5.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
+    id 'org.jreleaser' version '0.4.0'
+	id 'com.github.ben-manes.versions' version '0.39.0'
 }
 
 group = 'org.ruaux'
@@ -16,21 +17,21 @@ description = 'Spring Batch Resource'
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 bootJar {
     enabled = false
 }
 
 jar {
     enabled = true
-}
-
-java {
-    withJavadocJar()
-    withSourcesJar()
+    archiveClassifier = ''
 }
 
 repositories {
-	jcenter()
 	mavenCentral()
 	mavenLocal()
 }
@@ -53,26 +54,12 @@ test {
 	useJUnitPlatform()
 }
 
-distributions {
-    main {
-        contents {
-            from (project.docsDir) {
-                into 'docs'
-            }
-            from 'README.adoc'
-            from 'LICENSE'
-        }
-    }
-}
-
-distTar {
-    compression = Compression.GZIP
-}
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
+            from(components.java)
             versionMapping {
                 usage('java-api') {
                     fromResolutionOf('runtimeClasspath')
@@ -107,38 +94,45 @@ publishing {
     }
 }
 
-bintray {
-	user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-	key = project.hasProperty('bintrayKey') ? project.property('bintrayKey') : System.getenv('BINTRAY_KEY')
-	publications = ['mavenJava']
-	publish = true
-	pkg {
-		repo = 'maven'
-		name = project.name
-		licenses = ['Apache-2.0']
-		vcsUrl = 'https://github.com/jruaux/spring-batch-resource.git'
-		version {
-			gpg {
-				sign = true
-			}
-			mavenCentralSync {
-				sync = true
-				user = project.hasProperty('ossrhUsername') ? project.property('ossrhUsername') : ''
-				password = project.hasProperty('ossrhPassword') ? project.property('ossrhPassword') : ''
-			}
-		}
-	}
+signing {
+    sign publishing.publications.mavenJava
 }
 
-githubRelease {
-	token = project.hasProperty('githubToken') ? project.property('githubToken') : ''
-	owner "jruaux"
-	repo "spring-batch-resource"
-    releaseAssets distZip, distTar
-    draft true
-	body changelog()
+tasks.withType(Sign) {
+    onlyIf { isReleaseVersion }
 }
 
-tasks.distZip.shouldRunAfter tasks.javadocJar
-afterReleaseBuild.dependsOn ":githubRelease"
-afterReleaseBuild.dependsOn bintrayUpload
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
+check.dependsOn jacocoTestReport
+
+nexusPublishing {
+    repositories {
+        sonatype()
+    }
+}
+
+jreleaser {
+    project {
+        name = 'spring-batch-resource'
+        description = 'Spring Batch Resource'
+        longDescription = 'Spring Batch resource writers'
+        website = 'https://github.com/redis-developer/spring-batch-redis'
+        authors = ['Julien Ruaux']
+        tags = ['spring', 'batch', 'resource']
+        license = 'Apache-2.0'
+        copyright = '2020 Julien Ruaux'
+    }
+    release {
+        github {
+            username = 'jruaux'
+            owner = 'jruaux'
+            overwrite = true
+        }
+    }
+}
